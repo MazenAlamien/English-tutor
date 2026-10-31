@@ -3,7 +3,7 @@ import express from 'express';
 const app = express();
 app.set('trust proxy', 1);
 app.use(express.json({ limit: '50kb' }));
-app.use(express.static('public'));
+app.use(express.static('.'));
 
 const KEY = process.env.ANTHROPIC_API_KEY;
 const MODEL = process.env.MODEL || 'claude-sonnet-5-5';
