@@ -53,7 +53,7 @@ app.post('/api/chat', async (req, res) => {
       console.error('Anthropic error', r.status, JSON.stringify(data));
       return res.status(502).json({ error: 'upstream' });
     }
-    res.json({ text: data.content?.[0]?.text || '' });
+    res.json({ text: (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('') });
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: 'server' });
